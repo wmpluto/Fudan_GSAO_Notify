@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  schedule:
+    - cron: '00 11 * * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Run app
+        run: python main.py
+        env:
+          PUSH_KEY: ${{ secrets.PUSH_KEY }}
