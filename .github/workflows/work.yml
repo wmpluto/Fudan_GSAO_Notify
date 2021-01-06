@@ -19,6 +19,6 @@ jobs:
       - name: Prepare environment
         run: pip install beautifulsoup4 requests
       - name: Run app
-        run: python fudanDaily.py
+        run: python main.py
         env:
           PUSH_KEY: ${{ secrets.PUSH_KEY }}
