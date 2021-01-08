@@ -11,11 +11,6 @@ IT_URL = "http://www.it.fudan.edu.cn"
 IT_BULLETIN_URL = "http://www.it.fudan.edu.cn/Data/List/zxdt"
 
 
-def get_today_date():
-    _tz = timezone(+timedelta(hours=8))
-    return datetime.now(_tz).strftime("%Y-%m-%d")
-
-
 def get_session(_url):
     _session = requests.Session()
     _session.headers["User-Agent"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 14_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/7.0.18(0x17001229) NetType/WIFI Language/zh_CN miniProgram"
@@ -81,8 +76,9 @@ def notify(_title, _message=None):
 
 
 def main():
-    today = get_today_date()
-    print(today)
+    _tz = timezone(+timedelta(hours=8))
+    today = datetime.now(_tz).strftime("%Y-%m-%d")
+    print(datetime.now(_tz).strftime("%Y-%m-%d %H:%M"))
 
     msg = "\r\n\r\n".join(gsao_msg(today)) + "\r\n\r\n" + \
         "\r\n\r\n".join(it_msg(today))
