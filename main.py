@@ -25,6 +25,9 @@ def gsao_msg(_date):
     _soup = get_session(GSAO_BULLETIN_URL)
 
     _msg_list = []
+    if "Under Maintenance" in _soup.title.text:
+        return _msg_list
+
     for _li in _soup.find_all("li", class_="cols"):
         _li_date = _li.find_all("span")[3].text
         _li_title = _li.find_all("span")[0].a['title']
@@ -43,6 +46,9 @@ def it_msg(_date):
     _soup = get_session(IT_BULLETIN_URL)
 
     _msg_list = []
+    if "Under Maintenance" in _soup.title.text:
+        return _msg_list
+
     _ul = _soup.find_all("ul", class_="data-list")[0]
     for _li in _ul.find_all("li"):
         _li_date = _li.span.text.strip()
